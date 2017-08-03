@@ -1,0 +1,47 @@
+
+<head>
+	<meta charset="utf-8">
+	<script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
+</head>
+<!-- https://clipboardjs.com/ -->
+<script type="text/javascript">
+function copyUrl2()
+{
+	var Url2=document.getElementById("biao1");
+	Url2.select(); // 选择对象
+	document.execCommand("Copy"); // 执行浏览器复制命令
+	alert("复制成功："+Url2.value);
+}
+
+</script>
+<body>
+<h3>原生js复制文本框中的内容(ie9)</h3>
+<textarea cols="20" rows="10" id="biao1" style="width:20%;">自定义内容</textarea>
+
+<input type="button" onClick="copyUrl2()" value="点击复制" />
+
+<br>
+<h3>clipboard.js复制文本内容(兼容)</h3>
+
+<button class="btn" data-clipboard-text="this is btn1">
+    Copy to clipboard1
+</button>
+<button class="btn" data-clipboard-text="this is btn2">
+    Copy to clipboard2
+</button>
+
+</body>
+<script>	
+		var clipboard = new Clipboard('.btn');
+		clipboard.on('success', function(e) {
+			console.log(e)
+			alert("复制成功："+e.text)
+			console.log("clipboard-success:" + e.text)
+			e.clearSelection();
+		});
+		clipboard.on('error', function(e) {
+			alert("复制失败："+e.text)
+			console.log("clipboard-error:" + e.action)
+			
+		});
+</script>
